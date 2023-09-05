@@ -49,6 +49,7 @@ while (true)
             {
                 int settingsMenuOpt = settingsMenu.Start();
                 if (settingsMenuOpt == 6) break;
+                settingsMenu.ChangeColor(settingsMenuOpt);
                 menu.ChangeColor(settingsMenuOpt);
             }
 
