@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,9 +12,24 @@ namespace EzMenu
     {
         private List<string> _options;
         public List<string> Options { get; set; }
+        
+        public ConsoleColor MenuColor { get; set; } = ConsoleColor.Red;
 
         public Menu(ref List<string> options) => _options = options;
+
         public Menu(List<string> options) => _options = options;
+
+        public Menu(ref List<string> options, ConsoleColor color)
+        {
+            _options = options;
+            MenuColor = color;
+        }
+
+        public Menu(List<string> options, ConsoleColor color)
+        {
+            _options = options;
+            MenuColor = color;
+        }
 
         public void Print(ref int option)
         {
@@ -25,7 +42,7 @@ namespace EzMenu
             {
                 if (option == i)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = MenuColor;
                     Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (_options[i].Length / 2)) + "}", _options[i]));
                     Console.ResetColor();
                 }
@@ -45,7 +62,7 @@ namespace EzMenu
             {
                 if (option == i)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = MenuColor;
                     Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (_options[i].Length / 2)) + "}", _options[i]));
                     Console.ResetColor();
                 }
@@ -63,7 +80,7 @@ namespace EzMenu
                 Print(ref option);
                 key = Console.ReadKey();
 
-                if (key.Key == ConsoleKey.Escape) return 3439; // exit code
+                if (key.Key == ConsoleKey.Escape) return -1; // exit code
                 else if (key.Key == ConsoleKey.Enter) return option;
                 else if (key.Key == ConsoleKey.DownArrow) option++;
                 else if (key.Key == ConsoleKey.UpArrow) option--;
@@ -84,6 +101,41 @@ namespace EzMenu
                 else if (key.Key == ConsoleKey.Enter) return option;
                 else if (key.Key == ConsoleKey.DownArrow) option++;
                 else if (key.Key == ConsoleKey.UpArrow) option--;
+            }
+        }
+
+        public void ChangeColor(int colorCode)
+        {
+            // Black, White, Red, Green, Yellow, Blue - from enum, in order
+
+            switch (colorCode)
+            {
+                case 0:
+                    MenuColor = ConsoleColor.Black;
+                    break;
+
+                case 1:
+                    MenuColor = ConsoleColor.White;
+                    break;
+
+                case 2:
+                    MenuColor = ConsoleColor.Red;
+                    break;
+
+                case 3:
+                    MenuColor = ConsoleColor.Green;
+                    break;
+
+                case 4:
+                    MenuColor = ConsoleColor.Yellow;
+                    break;
+
+                case 5:
+                    MenuColor = ConsoleColor.Blue;
+                    break;
+
+                default:
+                    break;
             }
         }
     }

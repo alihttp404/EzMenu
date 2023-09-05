@@ -7,6 +7,7 @@ Menu menu = new Menu(new List<string>
     "Option 3",
     "Option 4",
     "Option 5",
+    "Settings",
     "Exit"
 });
 
@@ -41,12 +42,26 @@ while (true)
             break;
 
         case 5:
+            Menu settingsMenu = new Menu(new List<string> 
+                                        { "Black", "White", "Red", "Green", "Yellow", "Blue", "Exit" });
+
+            while (true)
+            {
+                int settingsMenuOpt = settingsMenu.Start();
+                if (settingsMenuOpt == 6) break;
+                menu.ChangeColor(settingsMenuOpt);
+            }
+
+            //Console.ReadKey(false);
+            break;
+
+        case 6:
             Console.WriteLine("Exiting...");
             Thread.Sleep(2000);
             return;
 
         case (-1):
-            Console.WriteLine("Exiting...");
+            Console.WriteLine("EExiting...");
             Thread.Sleep(2000);
             return;
 
