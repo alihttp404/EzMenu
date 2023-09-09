@@ -1,5 +1,6 @@
 ﻿using EzMenu;
 
+
 Menu menu = new Menu(new List<string>
 {
     "Option 1",
